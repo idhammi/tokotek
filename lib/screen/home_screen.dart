@@ -174,6 +174,7 @@ class Products extends StatelessWidget {
         mainAxisSpacing: 8,
       ),
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: productList.length,
       itemBuilder: (context, index) {
         return Container(
