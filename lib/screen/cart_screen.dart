@@ -56,7 +56,7 @@ class CartScreen extends StatelessWidget {
               ],
             ),
           ),
-          CartItems(),
+          const CartItems(),
           Expanded(
             child: Align(
               alignment: Alignment.bottomCenter,

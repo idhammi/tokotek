@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tokotek/constant/colors.dart';
 import 'package:tokotek/data/sample.dart';
+import 'package:tokotek/screen/detail_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -8,58 +10,120 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(Icons.discount_outlined),
-              Column(
-                children: [
-                  Text(
-                    "Delivery Adress",
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 1,
+        shadowColor: Colors.grey,
+        toolbarHeight: 60,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            RoundedIconButton(
+              icon: Icons.discount_outlined,
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('This is a snackbar')),
+                );
+              },
+              backgroundColor: AppColors.primary,
+            ),
+            const Column(
+              children: [
+                Text(
+                  "Delivery Adress",
+                  style: TextStyle(
+                    fontSize: 12,
                   ),
-                  Text(
-                    "92 High Street, London",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                    ),
+                ),
+                Text(
+                  "92 High Street, London",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
                   ),
-                ],
-              ),
-              Icon(Icons.notifications_none_outlined),
-            ],
-          ),
+                ),
+              ],
+            ),
+            RoundedIconButton(
+              icon: Icons.notifications_none_outlined,
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('This is a snackbar')),
+                );
+              },
+              backgroundColor: AppColors.background,
+            ),
+          ],
         ),
       ),
       body: Container(
         width: double.infinity,
-        decoration: const BoxDecoration(
-          color: Color(0xFFF0F1F2),
-        ),
+        color: AppColors.background,
         child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
                 width: double.infinity,
                 decoration: const BoxDecoration(
-                  color: Colors.yellow,
+                  color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(16),
-                    bottomRight: Radius.circular(16),
+                    bottomLeft: Radius.circular(24),
+                    bottomRight: Radius.circular(24),
                   ),
                 ),
-                child: const Column(
+                child: Column(
                   children: [
-                    SizedBox(height: 8),
-                    Text("Search the entire shop"),
-                    SizedBox(height: 8),
-                    Text("Delivery is 50% cheaper"),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
+                    Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
+                      decoration: const BoxDecoration(
+                        color: AppColors.background,
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.search,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            "Search the entire shop",
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w100,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(colors: AppColors.gradient),
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: const Text(
+                        "Delivery is 50% cheaper",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),
@@ -67,56 +131,103 @@ class HomeScreen extends StatelessWidget {
               Container(
                 width: double.infinity,
                 decoration: const BoxDecoration(
-                  color: Colors.cyan,
+                  color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
+                    topLeft: Radius.circular(24),
+                    topRight: Radius.circular(24),
                   ),
                 ),
-                child: const SingleChildScrollView(
+                child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Row(
                           children: [
-                            Text(
+                            const Text(
                               "Categories",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Spacer(),
-                            Text("See all"),
-                            Icon(Icons.chevron_right),
+                            const Spacer(),
+                            const Text(
+                              "See all",
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 15,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Container(
+                              width: 28,
+                              height: 28,
+                              decoration: const ShapeDecoration(
+                                shape: CircleBorder(),
+                                color: AppColors.background,
+                              ),
+                              child: const Icon(Icons.chevron_right),
+                            ),
                           ],
                         ),
                       ),
-                      SizedBox(height: 16),
-                      Categories(),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
+                      const Categories(),
+                      const SizedBox(height: 16),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Row(
                           children: [
-                            Text(
+                            const Text(
                               "Flash Sale",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Spacer(),
-                            Text("See all"),
-                            Icon(Icons.chevron_right),
+                            const SizedBox(width: 16),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppColors.primary,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: const Text(
+                                "02:59:23",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const Spacer(),
+                            const Text(
+                              "See all",
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 15,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Container(
+                              width: 28,
+                              height: 28,
+                              decoration: const ShapeDecoration(
+                                shape: CircleBorder(),
+                                color: AppColors.background,
+                              ),
+                              child: const Icon(Icons.chevron_right),
+                            ),
                           ],
                         ),
                       ),
-                      SizedBox(height: 16),
-                      Products(),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
+                      const Products(),
+                      const SizedBox(height: 16),
                     ],
                   ),
                 ),
@@ -141,15 +252,22 @@ class Categories extends StatelessWidget {
         child: Row(
           children: categoryList.map((category) {
             return Container(
-              decoration: const BoxDecoration(color: Colors.red),
               margin: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-                  Image.asset(
-                    category.icon,
-                    width: 64,
-                    height: 64,
+                  Container(
+                    decoration: const ShapeDecoration(
+                      shape: CircleBorder(),
+                      color: AppColors.background,
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    child: Image.asset(
+                      category.icon,
+                      width: 52,
+                      height: 52,
+                    ),
                   ),
+                  const SizedBox(height: 8),
                   Text(category.name),
                 ],
               ),
@@ -172,27 +290,123 @@ class Products extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
+        childAspectRatio: 0.8,
       ),
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: productList.length,
       itemBuilder: (context, index) {
-        return Container(
-          decoration: const BoxDecoration(color: Colors.green),
-          child: Center(
-            child: Column(
-              children: [
-                Image.asset(
-                  productList[index].image,
-                  width: 120,
-                  height: 120,
+        return InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailScreen(product: productList[index]),
+              ),
+            );
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Card(
+                  color: AppColors.background,
+                  elevation: 0,
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Image.asset(
+                            productList[index].image,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Container(
+                          width: 32,
+                          height: 32,
+                          margin: const EdgeInsets.all(16),
+                          decoration: const ShapeDecoration(
+                            shape: CircleBorder(),
+                            color: Colors.white,
+                          ),
+                          child: const Icon(
+                            Icons.favorite_outline,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                Text(productList[index].name),
-              ],
-            ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                productList[index].name,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Text(
+                    "${productList[index].currency}${productList[index].currentPrice.toStringAsFixed(2)}",
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    "${productList[index].currency}${productList[index].price.toStringAsFixed(2)}",
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                      decoration: TextDecoration.lineThrough,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         );
       },
+    );
+  }
+}
+
+class RoundedIconButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onPressed;
+  final Color? backgroundColor;
+
+  const RoundedIconButton({
+    super.key,
+    required this.icon,
+    required this.onPressed,
+    this.backgroundColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Ink(
+        decoration: ShapeDecoration(
+          color: backgroundColor ?? Colors.white,
+          shape: const CircleBorder(),
+        ),
+        padding: const EdgeInsets.all(4),
+        child: IconButton(
+          icon: Icon(icon),
+          onPressed: onPressed,
+        ),
+      ),
     );
   }
 }

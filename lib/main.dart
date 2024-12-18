@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tokotek/constant/colors.dart';
 import 'package:tokotek/screen/cart_screen.dart';
 import 'package:tokotek/screen/home_screen.dart';
 
@@ -26,7 +27,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 24, fontWeight: FontWeight.normal);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -59,6 +60,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -87,7 +89,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: const Color(0xFFC3E704),
+        selectedItemColor: AppColors.primary,
         onTap: _onItemTapped,
       ),
     );
