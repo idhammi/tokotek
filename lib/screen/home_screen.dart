@@ -17,14 +17,14 @@ class HomeScreen extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            RoundedIconButton(
+            IconButtonCircle(
               icon: Icons.discount_outlined,
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('This is a snackbar')),
                 );
               },
-              backgroundColor: AppColors.primary,
+              color: AppColors.primary,
             ),
             const Column(
               children: [
@@ -43,197 +43,211 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            RoundedIconButton(
+            IconButtonCircle(
               icon: Icons.notifications_none_outlined,
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('This is a snackbar')),
                 );
               },
-              backgroundColor: AppColors.background,
+              color: AppColors.background,
             ),
           ],
         ),
       ),
-      body: Container(
-        width: double.infinity,
-        color: AppColors.background,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(24),
-                    bottomRight: Radius.circular(24),
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 8),
-                    Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.symmetric(horizontal: 16),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 14,
-                      ),
-                      decoration: const BoxDecoration(
-                        color: AppColors.background,
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
-                      ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.search,
-                            color: Colors.grey,
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            "Search the entire shop",
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w100,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.symmetric(horizontal: 16),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 14,
-                      ),
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(colors: AppColors.gradient),
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
-                      ),
-                      child: const Text(
-                        "Delivery is 50% cheaper",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                  ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(24),
+                  bottomRight: Radius.circular(24),
                 ),
               ),
-              const SizedBox(height: 8),
-              Container(
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(24),
-                    topRight: Radius.circular(24),
-                  ),
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 16),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Row(
-                          children: [
-                            const Text(
-                              "Categories",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const Spacer(),
-                            const Text(
-                              "See all",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 15,
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Container(
-                              width: 28,
-                              height: 28,
-                              decoration: const ShapeDecoration(
-                                shape: CircleBorder(),
-                                color: AppColors.background,
-                              ),
-                              child: const Icon(Icons.chevron_right),
-                            ),
-                          ],
+              child: Column(
+                children: [
+                  const SizedBox(height: 8),
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
+                    ),
+                    decoration: const BoxDecoration(
+                      color: AppColors.background,
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.search,
+                          color: Colors.grey,
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      const Categories(),
-                      const SizedBox(height: 16),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Row(
+                        SizedBox(width: 8),
+                        Text(
+                          "Search the entire shop",
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w100,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
+                    ),
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(colors: AppColors.gradient),
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                    ),
+                    child: RichText(
+                      text: TextSpan(
+                          text: "Delivery is",
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
                           children: [
-                            const Text(
-                              "Flash Sale",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                color: AppColors.primary,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: const Text(
-                                "02:59:23",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                            WidgetSpan(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: const Text(
+                                  "50%",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               ),
                             ),
-                            const Spacer(),
-                            const Text(
-                              "See all",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 15,
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Container(
-                              width: 28,
-                              height: 28,
-                              decoration: const ShapeDecoration(
-                                shape: CircleBorder(),
-                                color: AppColors.background,
-                              ),
-                              child: const Icon(Icons.chevron_right),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      const Products(),
-                      const SizedBox(height: 16),
-                    ],
+                            const TextSpan(text: "cheaper"),
+                          ]),
+                    ),
                   ),
+                  const SizedBox(height: 16),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24),
+                  topRight: Radius.circular(24),
                 ),
               ),
-            ],
-          ),
+              child: Column(
+                children: [
+                  const SizedBox(height: 16),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      children: [
+                        const Text(
+                          "Categories",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Spacer(),
+                        const Text(
+                          "See all",
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 15,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          width: 28,
+                          height: 28,
+                          decoration: const ShapeDecoration(
+                            shape: CircleBorder(),
+                            color: AppColors.background,
+                          ),
+                          child: const Icon(Icons.chevron_right),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Categories(),
+                  const SizedBox(height: 16),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      children: [
+                        const Text(
+                          "Flash Sale",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Text(
+                            "02:59:23",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
+                        const Text(
+                          "See all",
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 15,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          width: 28,
+                          height: 28,
+                          decoration: const ShapeDecoration(
+                            shape: CircleBorder(),
+                            color: AppColors.background,
+                          ),
+                          child: const Icon(Icons.chevron_right),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Products(),
+                  const SizedBox(height: 16),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -381,31 +395,35 @@ class Products extends StatelessWidget {
   }
 }
 
-class RoundedIconButton extends StatelessWidget {
+class IconButtonCircle extends StatelessWidget {
   final IconData icon;
   final VoidCallback onPressed;
-  final Color? backgroundColor;
+  final Color? color;
+  final double? padding;
+  final double? iconSize;
 
-  const RoundedIconButton({
+  const IconButtonCircle({
     super.key,
     required this.icon,
     required this.onPressed,
-    this.backgroundColor,
+    this.color,
+    this.padding,
+    this.iconSize,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Ink(
-        decoration: ShapeDecoration(
-          color: backgroundColor ?? Colors.white,
-          shape: const CircleBorder(),
-        ),
-        padding: const EdgeInsets.all(4),
-        child: IconButton(
-          icon: Icon(icon),
-          onPressed: onPressed,
-        ),
+    return MaterialButton(
+      onPressed: onPressed,
+      color: color,
+      shape: const CircleBorder(),
+      padding: EdgeInsets.all(padding ?? 20),
+      elevation: 0,
+      minWidth: 0,
+      height: 0,
+      child: Icon(
+        icon,
+        size: iconSize,
       ),
     );
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tokotek/constant/colors.dart';
 import 'package:tokotek/data/sample.dart';
+import 'package:tokotek/screen/home_screen.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -8,75 +10,173 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cart"),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.menu),
-            tooltip: 'Show Menu',
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('This is a snackbar')));
-            },
-          ),
-        ],
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
+        toolbarHeight: 60,
+        title: Row(
+          children: [
+            const Text(
+              "Cart",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const Spacer(),
+            IconButtonCircle(
+              icon: Icons.more_horiz_outlined,
+              color: AppColors.background,
+              onPressed: () {},
+            )
+          ],
+        ),
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: const BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-              ),
-              child: const Row(
-                children: [
-                  Icon(Icons.location_pin),
-                  Text("92, High Street, London"),
-                  Spacer(),
-                  Icon(Icons.chevron_right)
-                ],
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(24),
+                bottomRight: Radius.circular(24),
               ),
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Row(
-              children: [
-                Checkbox(
-                  value: false,
-                  onChanged: null,
-                ),
-                Text("Select All"),
-                Spacer(),
-                Icon(Icons.upload_outlined),
-                SizedBox(width: 8),
-                Icon(Icons.edit_outlined),
-              ],
-            ),
-          ),
-          const CartItems(),
-          Expanded(
-            child: Align(
-              alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
               child: Container(
-                margin: const EdgeInsets.only(left: 24, right: 24, bottom: 48),
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(24)),
-                      )),
-                  onPressed: () {},
-                  child: const Text('Checkout'),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                decoration: const BoxDecoration(
+                  color: AppColors.background,
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                ),
+                child: const Row(
+                  children: [
+                    Icon(Icons.place_outlined, color: Colors.grey),
+                    SizedBox(width: 8),
+                    Text(
+                      "92, High Street, London",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Spacer(),
+                    Icon(Icons.chevron_right, color: Colors.grey),
+                  ],
                 ),
               ),
             ),
-          )
+          ),
+          const SizedBox(height: 8),
+          Expanded(
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24),
+                  topRight: Radius.circular(24),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 16,
+                  left: 16,
+                  right: 16,
+                  bottom: 32,
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        const CheckboxCart(),
+                        const SizedBox(width: 8),
+                        const Text(
+                          "Select All",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.upload_outlined),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.edit_outlined),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    const Expanded(
+                      child: CartItems(),
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 42,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'Checkout',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
+    );
+  }
+}
+
+class CheckboxCart extends StatefulWidget {
+  const CheckboxCart({super.key});
+
+  @override
+  State<CheckboxCart> createState() => _CheckboxCartState();
+}
+
+class _CheckboxCartState extends State<CheckboxCart> {
+  bool isChecked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    Color getColor(Set<WidgetState> states) {
+      const Set<WidgetState> interactiveStates = <WidgetState>{
+        WidgetState.pressed,
+        WidgetState.hovered,
+        WidgetState.focused,
+        WidgetState.selected,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return AppColors.secondary;
+      }
+      return Colors.transparent;
+    }
+
+    return Checkbox(
+      checkColor: Colors.white,
+      fillColor: WidgetStateProperty.resolveWith(getColor),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4),
+      ),
+      side: const BorderSide(
+        color: AppColors.secondary,
+        width: 1.8,
+      ),
+      value: isChecked,
+      onChanged: (bool? value) {
+        setState(() {
+          isChecked = value!;
+        });
+      },
     );
   }
 }
@@ -86,24 +186,28 @@ class CartItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+    return ListView.separated(
       shrinkWrap: true,
-      itemCount: productList.length,
+      // itemCount: productList.length,
+      itemCount: 2,
       itemBuilder: (context, index) {
-        return Container(
-          constraints: const BoxConstraints(minHeight: 100, maxHeight: 100),
-          decoration: const BoxDecoration(color: Colors.green),
+        return SizedBox(
+          height: 100,
           child: Row(
             children: [
-              const Checkbox(
-                value: false,
-                onChanged: null,
-              ),
-              Image.asset(
-                productList[index].image,
-                width: 90,
-                height: 90,
+              const CheckboxCart(),
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                  color: AppColors.background,
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                child: Image.asset(
+                  productList[index].image,
+                  width: 64,
+                  height: 64,
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -119,8 +223,13 @@ class CartItems extends StatelessWidget {
                     const Spacer(),
                     Row(
                       children: [
-                        Text(productList[index].currency),
-                        Text(productList[index].price.toString()),
+                        Text(
+                          "${productList[index].currency}${productList[index].price.toStringAsFixed(2)}",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         const Spacer(),
                         const CartItemCounter(),
                       ],
@@ -130,6 +239,15 @@ class CartItems extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return const Padding(
+          padding: EdgeInsets.only(left: 135),
+          child: Divider(
+            thickness: 2,
+            color: AppColors.background,
           ),
         );
       },
@@ -154,62 +272,47 @@ class _CartItemCounterState extends State<CartItemCounter> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            children: [
-              Ink(
-                decoration: const BoxDecoration(
-                  color: Colors.grey,
-                  shape: BoxShape.circle,
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      if (_amount > 1) _amount--;
-                    });
-                  },
-                  icon: const Icon(
-                    Icons.remove,
-                    color: Colors.black,
-                    size: 20,
-                  ),
-                ),
-              ),
-              Container(
-                constraints: const BoxConstraints(minWidth: 40, maxWidth: 40),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      _amount.toString(),
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+        Row(
+          children: [
+            IconButtonCircle(
+              icon: Icons.remove,
+              onPressed: () {
+                setState(() {
+                  if (_amount > 1) _amount--;
+                });
+              },
+              color: AppColors.background,
+              padding: 14,
+              iconSize: 16,
+            ),
+            Container(
+              constraints: const BoxConstraints(minWidth: 40, maxWidth: 40),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    _amount.toString(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
-                ),
-              ),
-              Ink(
-                decoration: const BoxDecoration(
-                  color: Colors.grey,
-                  shape: BoxShape.circle,
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      if (_amount < 10) _amount++;
-                    });
-                  },
-                  icon: const Icon(
-                    Icons.add,
-                    color: Colors.black,
-                    size: 20,
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
+            ),
+            IconButtonCircle(
+              icon: Icons.add,
+              onPressed: () {
+                setState(() {
+                  if (_amount < 10) _amount++;
+                });
+              },
+              color: AppColors.background,
+              padding: 14,
+              iconSize: 16,
+            ),
+          ],
         ),
       ],
     );

@@ -12,9 +12,21 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+        primaryColor: AppColors.primary,
+        scaffoldBackgroundColor: AppColors.background,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.primary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
-      home: BottomNavBar(),
+      home: const BottomNavBar(),
     );
   }
 }
@@ -27,7 +39,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 24, fontWeight: FontWeight.normal);
   static const List<Widget> _widgetOptions = <Widget>[

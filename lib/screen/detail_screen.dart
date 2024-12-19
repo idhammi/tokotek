@@ -51,21 +51,16 @@ class DetailScreen extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.bottomCenter,
                               child: SizedBox(
-                                height: 48,
+                                height: 42,
                                 width: double.infinity,
                                 child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: AppColors.primary,
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 14),
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8)),
-                                      )),
                                   onPressed: () {},
                                   child: const Text(
                                     'Add to cart',
-                                    style: TextStyle(color: Colors.black),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ),
