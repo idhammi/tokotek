@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tokotek/constant/colors.dart';
+import 'package:tokotek/constant/utils.dart';
 import 'package:tokotek/data/sample.dart';
 import 'package:tokotek/screen/home_screen.dart';
 
@@ -23,7 +24,11 @@ class CartScreen extends StatelessWidget {
             IconButtonCircle(
               icon: Icons.more_horiz_outlined,
               color: AppColors.background,
-              onPressed: () {},
+              onPressed: () {
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(snackBar);
+              },
             )
           ],
         ),
@@ -31,6 +36,7 @@ class CartScreen extends StatelessWidget {
       body: Column(
         children: [
           Container(
+            padding: const EdgeInsets.all(16),
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -38,30 +44,35 @@ class CartScreen extends StatelessWidget {
                 bottomRight: Radius.circular(24),
               ),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
-                decoration: const BoxDecoration(
-                  color: AppColors.background,
-                  borderRadius: BorderRadius.all(Radius.circular(16)),
-                ),
-                child: const Row(
-                  children: [
-                    Icon(Icons.place_outlined, color: Colors.grey),
-                    SizedBox(width: 8),
-                    Text(
-                      "92, High Street, London",
-                      style: TextStyle(
-                        fontSize: 15,
+            child: Material(
+              color: AppColors.background,
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              clipBehavior: Clip.hardEdge,
+              child: InkWell(
+                onTap: () {
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(snackBar);
+                },
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.place_outlined, color: Colors.grey),
+                      SizedBox(width: 8),
+                      Text(
+                        "92, High Street, London",
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
                       ),
-                    ),
-                    Spacer(),
-                    Icon(Icons.chevron_right, color: Colors.grey),
-                  ],
+                      Spacer(),
+                      Icon(Icons.chevron_right, color: Colors.grey),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -97,11 +108,19 @@ class CartScreen extends StatelessWidget {
                         ),
                         const Spacer(),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(snackBar);
+                          },
                           icon: const Icon(Icons.upload_outlined),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(snackBar);
+                          },
                           icon: const Icon(Icons.edit_outlined),
                         ),
                       ],
@@ -115,7 +134,11 @@ class CartScreen extends StatelessWidget {
                       height: 42,
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(snackBar);
+                        },
                         child: const Text(
                           'Checkout',
                           style: TextStyle(

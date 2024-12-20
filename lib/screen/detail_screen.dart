@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 import 'package:tokotek/constant/colors.dart';
+import 'package:tokotek/constant/utils.dart';
 import 'package:tokotek/model/product.dart';
 import 'package:tokotek/screen/home_screen.dart';
 
@@ -193,7 +194,11 @@ class DetailScreen extends StatelessWidget {
                                 height: 42,
                                 width: double.infinity,
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    ScaffoldMessenger.of(context)
+                                      ..hideCurrentSnackBar()
+                                      ..showSnackBar(snackBar);
+                                  },
                                   child: const Text(
                                     'Add to cart',
                                     style: TextStyle(
@@ -234,13 +239,21 @@ class DetailScreen extends StatelessWidget {
                   IconButtonCircle(
                     icon: Icons.favorite_outline,
                     color: Colors.white,
-                    onPressed: () {},
+                    onPressed: () {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(snackBar);
+                    },
                   ),
                   const SizedBox(width: 8),
                   IconButtonCircle(
                     icon: Icons.send_outlined,
                     color: Colors.white,
-                    onPressed: () {},
+                    onPressed: () {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(snackBar);
+                    },
                   ),
                 ],
               ),

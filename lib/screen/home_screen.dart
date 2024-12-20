@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tokotek/constant/colors.dart';
+import 'package:tokotek/constant/utils.dart';
 import 'package:tokotek/data/sample.dart';
 import 'package:tokotek/screen/detail_screen.dart';
 
@@ -20,9 +21,9 @@ class HomeScreen extends StatelessWidget {
             IconButtonCircle(
               icon: Icons.discount_outlined,
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('This is a snackbar')),
-                );
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(snackBar);
               },
               color: AppColors.primary,
             ),
@@ -47,9 +48,9 @@ class HomeScreen extends StatelessWidget {
             IconButtonCircle(
               icon: Icons.notifications_none_outlined,
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('This is a snackbar')),
-                );
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(snackBar);
               },
               color: AppColors.background,
             ),
@@ -60,6 +61,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -70,79 +72,96 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 8),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 14,
-                    ),
-                    decoration: const BoxDecoration(
-                      color: AppColors.background,
-                      borderRadius: BorderRadius.all(Radius.circular(16)),
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.search,
-                          color: Colors.grey,
+                  Material(
+                    color: AppColors.background,
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    clipBehavior: Clip.hardEdge,
+                    child: InkWell(
+                      onTap: () {
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(snackBar);
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 14,
                         ),
-                        SizedBox(width: 8),
-                        Text(
-                          "Search the entire shop",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w300,
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.search,
+                              color: Colors.grey,
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              "Search the entire shop",
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Container(
-                    width: double.infinity,
-                    margin: const EdgeInsets.symmetric(horizontal: 16),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 14,
-                    ),
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(colors: AppColors.gradient),
-                      borderRadius: BorderRadius.all(Radius.circular(16)),
-                    ),
-                    child: RichText(
-                      text: TextSpan(
-                          text: "Delivery is",
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                          children: [
-                            WidgetSpan(
-                              alignment: PlaceholderAlignment.middle,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 6,
-                                  vertical: 2,
-                                ),
-                                child: const Text(
-                                  "50%",
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w500,
+                  Material(
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    clipBehavior: Clip.hardEdge,
+                    child: InkWell(
+                      splashColor: AppColors.primary,
+                      onTap: () {
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(snackBar);
+                      },
+                      child: Ink(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 14,
+                        ),
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(colors: AppColors.gradient),
+                        ),
+                        child: RichText(
+                          text: TextSpan(
+                              text: "Delivery is",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                              ),
+                              children: [
+                                WidgetSpan(
+                                  alignment: PlaceholderAlignment.middle,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 8),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 6,
+                                      vertical: 2,
+                                    ),
+                                    child: const Text(
+                                      "50%",
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                            const TextSpan(text: "cheaper"),
-                          ]),
+                                const TextSpan(text: "cheaper"),
+                              ]),
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -186,7 +205,11 @@ class HomeScreen extends StatelessWidget {
                           color: AppColors.background,
                           iconSize: 21,
                           padding: 11,
-                          onPressed: () {},
+                          onPressed: () {
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(snackBar);
+                          },
                         ),
                       ],
                     ),
@@ -237,7 +260,11 @@ class HomeScreen extends StatelessWidget {
                           color: AppColors.background,
                           iconSize: 21,
                           padding: 11,
-                          onPressed: () {},
+                          onPressed: () {
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(snackBar);
+                          },
                         ),
                       ],
                     ),
@@ -271,16 +298,25 @@ class Categories extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(
                 children: [
-                  Container(
-                    decoration: const ShapeDecoration(
-                      shape: CircleBorder(),
-                      color: AppColors.background,
-                    ),
-                    padding: const EdgeInsets.all(8),
-                    child: Image.asset(
-                      category.icon,
-                      width: 52,
-                      height: 52,
+                  Material(
+                    color: AppColors.background,
+                    clipBehavior: Clip.hardEdge,
+                    shape: const CircleBorder(),
+                    child: InkWell(
+                      splashColor: AppColors.primary,
+                      onTap: () {
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(snackBar);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Image.asset(
+                          category.icon,
+                          width: 52,
+                          height: 52,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -317,79 +353,90 @@ class Products extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       itemCount: productList.length,
       itemBuilder: (context, index) {
-        return InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DetailScreen(product: productList[index]),
-              ),
-            );
-          },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Card(
-                  color: AppColors.background,
-                  elevation: 0,
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.center,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Image.asset(
-                            productList[index].image,
+        return Material(
+          color: Colors.transparent,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: AppColors.primary,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      DetailScreen(product: productList[index]),
+                ),
+              );
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Card(
+                    color: AppColors.background,
+                    elevation: 0,
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Image.asset(
+                              productList[index].image,
+                            ),
                           ),
                         ),
-                      ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: IconButtonCircle(
-                            icon: Icons.favorite_border_outlined,
-                            color: Colors.white,
-                            padding: 12,
-                            iconSize: 20,
-                            iconColor: Colors.grey,
-                            onPressed: () {},
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: IconButtonCircle(
+                              icon: Icons.favorite_border_outlined,
+                              color: Colors.white,
+                              padding: 12,
+                              iconSize: 20,
+                              iconColor: Colors.grey,
+                              onPressed: () {
+                                ScaffoldMessenger.of(context)
+                                  ..hideCurrentSnackBar()
+                                  ..showSnackBar(snackBar);
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                productList[index].name,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  Text(
-                    "${productList[index].currency}${productList[index].currentPrice.toStringAsFixed(2)}",
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                const SizedBox(height: 8),
+                Text(
+                  productList[index].name,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Text(
+                      "${productList[index].currency}${productList[index].currentPrice.toStringAsFixed(2)}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    "${productList[index].currency}${productList[index].price.toStringAsFixed(2)}",
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey,
-                      decoration: TextDecoration.lineThrough,
+                    const SizedBox(width: 8),
+                    Text(
+                      "${productList[index].currency}${productList[index].price.toStringAsFixed(2)}",
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: Colors.grey,
+                        decoration: TextDecoration.lineThrough,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
