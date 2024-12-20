@@ -16,6 +16,20 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: AppColors.primary,
         scaffoldBackgroundColor: AppColors.background,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          selectedIconTheme: IconThemeData(
+            color: AppColors.primary,
+            size: 26,
+          ),
+          unselectedIconTheme: IconThemeData(
+            color: Colors.grey,
+            size: 26,
+          ),
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
+          selectedLabelStyle: TextStyle(fontSize: 12),
+          unselectedLabelStyle: TextStyle(fontSize: 12),
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primary,
@@ -39,9 +53,8 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int _selectedIndex = 2;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 24, fontWeight: FontWeight.normal);
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle = TextStyle(fontSize: 18);
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     Text(
@@ -101,7 +114,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.primary,
         onTap: _onItemTapped,
       ),
     );

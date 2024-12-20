@@ -57,7 +57,6 @@ class CartScreen extends StatelessWidget {
                       "92, High Street, London",
                       style: TextStyle(
                         fontSize: 15,
-                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     Spacer(),
@@ -92,7 +91,9 @@ class CartScreen extends StatelessWidget {
                         const SizedBox(width: 8),
                         const Text(
                           "Select All",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                         const Spacer(),
                         IconButton(
@@ -118,9 +119,8 @@ class CartScreen extends StatelessWidget {
                         child: const Text(
                           'Checkout',
                           style: TextStyle(
-                            fontSize: 16,
                             color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
@@ -161,22 +161,25 @@ class _CheckboxCartState extends State<CheckboxCart> {
       return Colors.transparent;
     }
 
-    return Checkbox(
-      checkColor: Colors.white,
-      fillColor: WidgetStateProperty.resolveWith(getColor),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
+    return Transform.scale(
+      scale: 1.1,
+      child: Checkbox(
+        checkColor: Colors.white,
+        fillColor: WidgetStateProperty.resolveWith(getColor),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4),
+        ),
+        side: const BorderSide(
+          color: AppColors.secondary,
+          width: 1.8,
+        ),
+        value: isChecked,
+        onChanged: (bool? value) {
+          setState(() {
+            isChecked = value!;
+          });
+        },
       ),
-      side: const BorderSide(
-        color: AppColors.secondary,
-        width: 1.8,
-      ),
-      value: isChecked,
-      onChanged: (bool? value) {
-        setState(() {
-          isChecked = value!;
-        });
-      },
     );
   }
 }
@@ -224,10 +227,10 @@ class CartItems extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "${productList[index].currency}${productList[index].price.toStringAsFixed(2)}",
+                          "${productList[index].currency}${productList[index].currentPrice.toStringAsFixed(2)}",
                           style: const TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         const Spacer(),
@@ -295,7 +298,6 @@ class _CartItemCounterState extends State<CartItemCounter> {
                     _amount.toString(),
                     style: const TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],

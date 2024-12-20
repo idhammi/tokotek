@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:readmore/readmore.dart';
 import 'package:tokotek/constant/colors.dart';
 import 'package:tokotek/model/product.dart';
+import 'package:tokotek/screen/home_screen.dart';
 
 class DetailScreen extends StatelessWidget {
   final Product product;
@@ -16,7 +18,9 @@ class DetailScreen extends StatelessWidget {
           children: [
             Column(
               children: [
-                Image.network(product.image),
+                Expanded(
+                  child: Image.asset(product.image),
+                ),
                 Expanded(
                   child: Container(
                     decoration: const BoxDecoration(
@@ -39,12 +43,147 @@ class DetailScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 16),
-                          const Text("Rating 4.8"),
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.star,
+                                      color: AppColors.secondary,
+                                      size: 18,
+                                    ),
+                                    SizedBox(width: 4),
+                                    Text(
+                                      "4.8",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    SizedBox(width: 8),
+                                    Text(
+                                      "117 Reviews",
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.thumb_up,
+                                      color: AppColors.primary,
+                                      size: 18,
+                                    ),
+                                    SizedBox(width: 4),
+                                    Text(
+                                      "94%",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.question_answer,
+                                      color: Colors.grey,
+                                      size: 18,
+                                    ),
+                                    SizedBox(width: 4),
+                                    Text(
+                                      "8",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                           const SizedBox(height: 16),
-                          Text(product.price.toString()),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              color: AppColors.background,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "${product.currency}${product.currentPrice.toStringAsFixed(2)}",
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  "from \$${(product.currentPrice / 12).toStringAsFixed(0)} per month",
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 13,
+                                  ),
+                                ),
+                                const Spacer(),
+                                const Icon(
+                                  Icons.info_outline,
+                                  color: Colors.grey,
+                                ),
+                              ],
+                            ),
+                          ),
                           const SizedBox(height: 16),
-                          const Text(
-                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+                          const ReadMoreText(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida tristique nisl eget gravida. Sed ornare scelerisque facilisis. Phasellus auctor condimentum nunc. Donec viverra dolor ac sagittis bibendum. Fusce consequat sit amet urna vitae laoreet. ",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey,
+                            ),
+                            trimMode: TrimMode.Line,
+                            trimLines: 3,
+                            colorClickableText: Colors.black,
                           ),
                           const SizedBox(height: 16),
                           Expanded(
@@ -59,7 +198,7 @@ class DetailScreen extends StatelessWidget {
                                     'Add to cart',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ),
@@ -67,7 +206,12 @@ class DetailScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Center(child: Text("Delivered on 26 October"))
+                          const Center(
+                            child: Text(
+                              "Delivered on 26 October",
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -79,50 +223,24 @@ class DetailScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
-                    child: IconButton(
-                      icon: const Icon(Icons.chevron_left),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
+                  IconButtonCircle(
+                    icon: Icons.chevron_left,
+                    color: Colors.white,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
                   const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
-                    child: IconButton(
-                      icon: const Icon(Icons.favorite_outline),
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('This is a snackbar')));
-                      },
-                    ),
+                  IconButtonCircle(
+                    icon: Icons.favorite_outline,
+                    color: Colors.white,
+                    onPressed: () {},
                   ),
                   const SizedBox(width: 8),
-                  Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
-                    child: IconButton(
-                      icon: const Icon(Icons.send_outlined),
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('This is a snackbar')));
-                      },
-                    ),
+                  IconButtonCircle(
+                    icon: Icons.send_outlined,
+                    color: Colors.white,
+                    onPressed: () {},
                   ),
                 ],
               ),

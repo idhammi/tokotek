@@ -32,13 +32,14 @@ class HomeScreen extends StatelessWidget {
                   "Delivery Adress",
                   style: TextStyle(
                     fontSize: 12,
+                    fontWeight: FontWeight.w300,
                   ),
                 ),
                 Text(
                   "92 High Street, London",
                   style: TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
@@ -70,7 +71,6 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 8),
                   Container(
-                    width: double.infinity,
                     margin: const EdgeInsets.symmetric(horizontal: 16),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -93,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: 16,
-                            fontWeight: FontWeight.w100,
+                            fontWeight: FontWeight.w300,
                           ),
                         ),
                       ],
@@ -115,24 +115,28 @@ class HomeScreen extends StatelessWidget {
                       text: TextSpan(
                           text: "Delivery is",
                           style: const TextStyle(
-                            fontSize: 15,
                             fontWeight: FontWeight.w600,
+                            color: Colors.black,
                           ),
                           children: [
                             WidgetSpan(
+                              alignment: PlaceholderAlignment.middle,
                               child: Container(
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(5),
                                 ),
                                 margin:
                                     const EdgeInsets.symmetric(horizontal: 8),
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 2,
+                                ),
                                 child: const Text(
                                   "50%",
                                   style: TextStyle(
-                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
@@ -156,7 +160,7 @@ class HomeScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 18),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Row(
@@ -164,7 +168,7 @@ class HomeScreen extends StatelessWidget {
                         const Text(
                           "Categories",
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 21,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -177,21 +181,19 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        Container(
-                          width: 28,
-                          height: 28,
-                          decoration: const ShapeDecoration(
-                            shape: CircleBorder(),
-                            color: AppColors.background,
-                          ),
-                          child: const Icon(Icons.chevron_right),
+                        IconButtonCircle(
+                          icon: Icons.chevron_right,
+                          color: AppColors.background,
+                          iconSize: 21,
+                          padding: 11,
+                          onPressed: () {},
                         ),
                       ],
                     ),
                   ),
                   const SizedBox(height: 16),
                   const Categories(),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 18),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Row(
@@ -199,7 +201,7 @@ class HomeScreen extends StatelessWidget {
                         const Text(
                           "Flash Sale",
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 21,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -216,7 +218,8 @@ class HomeScreen extends StatelessWidget {
                           child: const Text(
                             "02:59:23",
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
@@ -229,14 +232,12 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        Container(
-                          width: 28,
-                          height: 28,
-                          decoration: const ShapeDecoration(
-                            shape: CircleBorder(),
-                            color: AppColors.background,
-                          ),
-                          child: const Icon(Icons.chevron_right),
+                        IconButtonCircle(
+                          icon: Icons.chevron_right,
+                          color: AppColors.background,
+                          iconSize: 21,
+                          padding: 11,
+                          onPressed: () {},
                         ),
                       ],
                     ),
@@ -263,10 +264,11 @@ class Categories extends StatelessWidget {
       alignment: Alignment.topLeft,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Row(
           children: categoryList.map((category) {
             return Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16),
+              margin: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(
                 children: [
                   Container(
@@ -282,7 +284,12 @@ class Categories extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(category.name),
+                  Text(
+                    category.name,
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
                 ],
               ),
             );
@@ -339,17 +346,15 @@ class Products extends StatelessWidget {
                       ),
                       Align(
                         alignment: Alignment.topRight,
-                        child: Container(
-                          width: 32,
-                          height: 32,
-                          margin: const EdgeInsets.all(16),
-                          decoration: const ShapeDecoration(
-                            shape: CircleBorder(),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: IconButtonCircle(
+                            icon: Icons.favorite_border_outlined,
                             color: Colors.white,
-                          ),
-                          child: const Icon(
-                            Icons.favorite_outline,
-                            color: Colors.grey,
+                            padding: 12,
+                            iconSize: 20,
+                            iconColor: Colors.grey,
+                            onPressed: () {},
                           ),
                         ),
                       ),
@@ -360,9 +365,6 @@ class Products extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 productList[index].name,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -372,15 +374,15 @@ class Products extends StatelessWidget {
                   Text(
                     "${productList[index].currency}${productList[index].currentPrice.toStringAsFixed(2)}",
                     style: const TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   const SizedBox(width: 8),
                   Text(
                     "${productList[index].currency}${productList[index].price.toStringAsFixed(2)}",
                     style: const TextStyle(
-                      fontSize: 14,
+                      fontSize: 13,
                       color: Colors.grey,
                       decoration: TextDecoration.lineThrough,
                     ),
@@ -401,6 +403,7 @@ class IconButtonCircle extends StatelessWidget {
   final Color? color;
   final double? padding;
   final double? iconSize;
+  final Color? iconColor;
 
   const IconButtonCircle({
     super.key,
@@ -409,6 +412,7 @@ class IconButtonCircle extends StatelessWidget {
     this.color,
     this.padding,
     this.iconSize,
+    this.iconColor,
   });
 
   @override
@@ -424,6 +428,7 @@ class IconButtonCircle extends StatelessWidget {
       child: Icon(
         icon,
         size: iconSize,
+        color: iconColor,
       ),
     );
   }
